@@ -1,7 +1,9 @@
 
-import { Search } from "lucide-react";
-import { useState } from "react";
+import { Search, Sun, Moon } from "lucide-react";
+import { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
+import { Switch } from "@/components/ui/switch";
+import { useTheme } from "@/hooks/use-theme";
 
 interface MenuItem {
   id: number;
@@ -11,6 +13,7 @@ interface MenuItem {
 
 export default function Sidebar() {
   const [activeItem, setActiveItem] = useState<number>(4);
+  const { theme, setTheme } = useTheme();
   
   const menuItems: MenuItem[] = [
     { id: 1, title: "Darsatlardan rivajlanishi organamiz" },
@@ -36,9 +39,20 @@ export default function Sidebar() {
   };
   
   return (
-    <aside className="w-[320px] h-screen bg-[#1a1a1a] text-gray-200 flex flex-col overflow-hidden animate-fade-in">
+    <aside className="w-[320px] h-screen bg-[#1a1a1a] text-gray-200 flex flex-col overflow-hidden animate-fade-in dark:bg-[#1a1a1a] dark:text-gray-200 light:bg-white light:text-gray-800">
       <div className="px-6 py-7">
-        <h2 className="text-xl font-medium mb-4 opacity-90">Parallel Muhit</h2>
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl font-medium opacity-90">Parallel Muhit</h2>
+          <div className="flex items-center gap-2">
+            <Sun className="h-4 w-4" />
+            <Switch 
+              checked={theme === "dark"}
+              onCheckedChange={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="data-[state=checked]:bg-blue-500"
+            />
+            <Moon className="h-4 w-4" />
+          </div>
+        </div>
         
         <div className="relative mb-6">
           <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none opacity-70">
@@ -47,7 +61,7 @@ export default function Sidebar() {
           <Input 
             type="search"
             placeholder="Search page or heading..."
-            className="pl-10 py-2 bg-[#252525] border-0 text-sm font-light focus-visible:ring-1 focus-visible:ring-gray-500"
+            className="pl-10 py-2 bg-[#252525] border-0 text-sm font-light focus-visible:ring-1 focus-visible:ring-gray-500 dark:bg-[#252525] light:bg-gray-100"
           />
         </div>
         
@@ -59,6 +73,8 @@ export default function Sidebar() {
                   onClick={() => handleMenuItemClick(item.id)}
                   className={`w-full text-left py-1.5 px-4 rounded-sm flex items-center hover:bg-[#252525] transition-colors duration-200 ${
                     activeItem === item.id ? "text-blue-400" : "text-gray-300"
+                  } dark:hover:bg-[#252525] light:hover:bg-gray-100 light:text-gray-700 ${
+                    activeItem === item.id ? "text-blue-400" : "light:text-gray-700 dark:text-gray-300"
                   }`}
                 >
                   <span className="text-gray-500 mr-2 w-5 text-right">{item.id}.</span>

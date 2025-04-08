@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import Sidebar from "./Sidebar";
 import MainContent from "./MainContent";
+import { ThemeProvider } from "@/hooks/use-theme";
 
 export default function Layout({ children }: { children?: React.ReactNode }) {
   const { toast } = useToast();
@@ -21,9 +22,11 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
   }, [toast]);
 
   return (
-    <div className="flex min-h-screen bg-black text-white overflow-hidden">
-      <Sidebar />
-      <MainContent />
-    </div>
+    <ThemeProvider>
+      <div className="flex min-h-screen bg-black text-white overflow-hidden dark:bg-black dark:text-white light:bg-gray-50 light:text-gray-900">
+        <Sidebar />
+        <MainContent />
+      </div>
+    </ThemeProvider>
   );
 }
