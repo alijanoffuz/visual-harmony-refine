@@ -1,0 +1,74 @@
+
+import { Search } from "lucide-react";
+import { useState } from "react";
+import { Input } from "@/components/ui/input";
+
+interface MenuItem {
+  id: number;
+  title: string;
+  active?: boolean;
+}
+
+export default function Sidebar() {
+  const [activeItem, setActiveItem] = useState<number>(4);
+  
+  const menuItems: MenuItem[] = [
+    { id: 1, title: "Darsatlardan rivajlanishi organamiz" },
+    { id: 2, title: "Javoblarni endi nima qilamiz?" },
+    { id: 3, title: "Nima aylash ish uch kitob irayalva qilindi" },
+    { id: 4, title: "Parallel muhit haqida", active: true },
+    { id: 5, title: "Uzun yollar haqida" },
+    { id: 6, title: "Odamga qomusiylik yarashadi" },
+    { id: 7, title: "Qachon amal qilishni boshlayxiz" },
+    { id: 8, title: "Sizva va xato bilan qo'rquvni yengamiz" },
+    { id: 9, title: "Biz — bu qilaydigon ishlarimiz" },
+    { id: 10, title: "Zo'r ishlar qanday qilinadi" },
+    { id: 11, title: "Maslahatlarni kimdan olamiz" },
+    { id: 12, title: "Narsalarning aslini ko'rishni organamiz" },
+    { id: 13, title: "U mendan o'lib ketyapti" },
+    { id: 14, title: "Misol bilan gaplashamiz" },
+    { id: 15, title: "Rozi va norozilik o'rtasini topamiz" },
+    { id: 16, title: "Vaqtni ushlashga urinib" },
+  ];
+  
+  const handleMenuItemClick = (id: number) => {
+    setActiveItem(id);
+  };
+  
+  return (
+    <aside className="w-[320px] h-screen bg-[#1a1a1a] text-gray-200 flex flex-col overflow-hidden animate-fade-in">
+      <div className="px-6 py-7">
+        <h2 className="text-xl font-medium mb-4 opacity-90">Parallel Muhit</h2>
+        
+        <div className="relative mb-6">
+          <div className="absolute inset-y-0 left-3 flex items-center pointer-events-none opacity-70">
+            <Search className="h-4 w-4" />
+          </div>
+          <Input 
+            type="search"
+            placeholder="Search page or heading..."
+            className="pl-10 py-2 bg-[#252525] border-0 text-sm font-light focus-visible:ring-1 focus-visible:ring-gray-500"
+          />
+        </div>
+        
+        <nav className="overflow-y-auto max-h-[calc(100vh-140px)] pr-1 -mr-1">
+          <ul className="space-y-1 text-sm">
+            {menuItems.map((item) => (
+              <li key={item.id} className="relative">
+                <button
+                  onClick={() => handleMenuItemClick(item.id)}
+                  className={`w-full text-left py-1.5 px-4 rounded-sm flex items-center hover:bg-[#252525] transition-colors duration-200 ${
+                    activeItem === item.id ? "text-blue-400" : "text-gray-300"
+                  }`}
+                >
+                  <span className="text-gray-500 mr-2 w-5 text-right">{item.id}.</span>
+                  <span className="leading-tight">{item.title}</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      </div>
+    </aside>
+  );
+}
