@@ -23,7 +23,7 @@ export default function Layout({ children }: { children?: React.ReactNode }) {
 
   return (
     <ThemeProvider>
-      <div className="flex min-h-screen bg-black text-white overflow-hidden dark:bg-black dark:text-white light:bg-gray-50 light:text-gray-900">
+      <div className="flex min-h-screen bg-black text-white overflow-hidden dark:bg-black dark:text-white light:bg-gray-50 light:text-gray-900 relative">
         <Sidebar />
         <MainContent />
       </div>

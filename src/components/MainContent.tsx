@@ -2,14 +2,16 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Send } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
 
 export default function MainContent() {
   const [isHovered, setIsHovered] = useState(false);
+  const isMobile = useIsMobile();
   
   return (
-    <main className="flex-1 bg-[#121212] text-gray-100 overflow-auto animate-fade-in dark:bg-[#121212] dark:text-gray-100 light:bg-gray-50 light:text-gray-900">
+    <main className="flex-1 bg-[#121212] text-gray-100 overflow-auto animate-fade-in dark:bg-[#121212] dark:text-gray-100 light:bg-gray-50 light:text-gray-900 md:ml-0 transition-all duration-300">
       <div className="max-w-4xl mx-auto px-6 py-10 md:py-16 flex flex-col min-h-screen">
-        <header className="mb-16 md:mb-24">
+        <header className="mb-16 md:mb-24 mt-8 md:mt-0">
           <h1 className="text-3xl md:text-4xl font-medium tracking-tight">
             4. Parallel muhit haqida
           </h1>
